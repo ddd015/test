@@ -1,0 +1,5 @@
+это не для iptables
+export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 80 -j DNAT --to-destination 10.0.3.24:80
+
