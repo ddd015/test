@@ -1,0 +1,30 @@
+- hosts: all
+  tasks:
+    - name: Create read folder
+      file:
+        path: "{{ item.dir }}"
+        owner: "{{ item.own }}"
+        mode: "{{ item.prava }}"
+        state: directory
+      with_items:
+       - {dir: '/home/vagrant/read', own: 'vagrant', prava: '0555'}
+       - {dir: '/home/vagrant/full', own: 'vagrant', prava: '0777'}
+       - {dir: '/mnt/root', own: 'root', prava: '0700'}
+    - name: Install Apache
+      apt:
+        pkg: 
+        - apache2
+        - mc
+        state: present
+    - name: chesk on
+      service:
+        name: apache2
+        enabled: yes
+    - name: Start apache2 on start system
+      service:
+        name: apache2
+        state: started
+    - name: create file
+      file:
+        path: /var/www/html/index.html
+        content: "Hello"
