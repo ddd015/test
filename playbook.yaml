@@ -25,6 +25,6 @@
         name: apache2
         state: started
     - name: create file
-      file:
+      copy:
         dest: /var/www/html/index.html
-        content: "Hello"
+        content: "uyuyu  {{ ansible_facts.memtotal_mb }} !!!"
